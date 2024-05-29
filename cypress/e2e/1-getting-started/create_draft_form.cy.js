@@ -1,4 +1,6 @@
 /// <reference types="cypress" />
+import "cypress-axe"
+
 
 describe('Basic form creation and preview', () => {
   before(() => {    
@@ -8,7 +10,7 @@ describe('Basic form creation and preview', () => {
     cy.get('#kc-login').click()
   })
 
-  it.only('Login', () => {   
+  it('Login', () => {   
     cy.visit('http://localhost:3000/library')    
     cy.origin('http://localhost:3000', () => {
       cy.contains('Create new form').click()
@@ -161,6 +163,29 @@ describe('Basic form creation and preview', () => {
 //       cy.contains('Clear completed').should('not.exist')
 //     })
 //   })
+})
+
+describe('Accessibilty of a form in runner', () => {
+
+  it('Axe core -  accessiblity test',() => {
+  cy.visit('https://forms-runner.dev.cdp-int.defra.cloud/preview/draft/bob-123/page-one')
+   cy.injectAxe() // Inject axe-core into the page
+   // Run accessibility tests on the page
+   cy.checkA11y(null, {
+    includedImpacts: ['minor', 'moderate', 'serious', 'critical'],
+    })
+
+  })
+
+  it('Axe core -  accessiblity test after error',() => {
+    cy.visit('https://forms-runner.dev.cdp-int.defra.cloud/preview/draft/bob-123/page-one')
+    cy.get('#submit').click()
+    cy.injectAxe();
+    cy.checkA11y(null, {
+      includedImpacts: ['minor', 'moderate', 'serious', 'critical'],
+      })
+    })
+
 })
 
 //create  form
