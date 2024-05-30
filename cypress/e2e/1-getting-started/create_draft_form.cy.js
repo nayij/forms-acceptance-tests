@@ -2,7 +2,7 @@
 import "cypress-axe"
 
 
-describe('Basic form creation and preview', () => {
+describe('Happy Path journey', () => {
   before(() => {    
     cy.visit('http://localhost:8080/admin')
     cy.get('#username').type('forms-user')
@@ -188,10 +188,19 @@ describe('Accessibilty of a form in runner', () => {
 
 })
 
-//create  form
+describe.only('Page not found on the runner', () => {
+  it('Page not found should be displayed when trying to reach non existent form', () =>{
+    cy.visit('http://localhost:3009/non-existant-form', {'failOnStatusCode': false})
+    cy.get('.govuk-heading-l').should('contain.text', 'Page not found')
+    
+  })
+})
+
+//create  form - DONE
 //update a form * flavours
-//preview draft form
-//preview live form
+//preview draft form - DONE
+//preview live form -DONE
 //make for live
 //Submit a live form * flavours
+// Page not found page - DONE
 
