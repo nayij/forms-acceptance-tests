@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "e2e:chrome": "cypress run --browser chrome"
+    
   },
   "dependencies": {
     "axe-core": "^4.9.1",

@@ -1,3 +1,6 @@
 npx cypress run
+npx cypress open
 
-npx cypress run --record --spec "cypress/e2e/my-spec.cy.js"
+Run smoke test via command line
+
+npm run e2e:chrome -- --spec "cypress/e2e/1-Forms lifecycle/SmokeTest.cy.ts"
